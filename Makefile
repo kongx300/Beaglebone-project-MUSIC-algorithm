@@ -4,22 +4,16 @@
 
 CXX=g++
 
-#CXX=CC
-## When using the Sun Studio compiler
+OS_NAME := $(shell uname -s | tr A-Z a-z)
 
 
 # flags configured by CMake
-ifeq (macos,macos)
+ifeq (OS_NAME,macos)
   LIB_FLAGS = -larmadillo -framework Accelerate
 else
-  LIB_FLAGS = -larmadillo
   ## NOTE: on Ubuntu and Debian based systems you may need to add -lgfortran
-  
-  #LIB_FLAGS = -larmadillo -library=sunperf
-  ## When using the Sun Studio compiler
+  LIB_FLAGS = -larmadillo -lgfortran
 endif
-
-
 
 
 
@@ -28,8 +22,7 @@ OPT = -O2
 ##
 ## -O0: quick compilation, but the resulting program will be slow
 ## -O1: good trade-off between compilation time and execution speed
-## -O2: produces programs which have almost all possible speedups, but compilation takes longer
-## -O3: enables auto vectorisation when using gcc
+## -O2: produces programs which have almost all possible speedups, but compilation takes longer## -O3: enables auto vectorisation when using gcc
 
 #OPT = -xO4 -xannotate=no
 ## When using the Sun Studio compiler
@@ -61,5 +54,5 @@ practiceMUSIC: practiceMUSIC.cpp
 .PHONY: clean
 
 clean:
-	rm -f practiceMUSIC
+	rm -f practiceMUSIC *~ \#* 
 

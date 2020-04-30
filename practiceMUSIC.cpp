@@ -22,7 +22,7 @@ int main(int argc, char** argv){
 	double dt;
 	dt = t(1) - t(0);
 	double fsamp = 1/dt;
-	double f0 = 1.0;
+	double f0 = 2.0;
 	vec x;
 	x = sin(2*pi*f0*t); // x is col vector
 	
@@ -40,7 +40,7 @@ void music_estimate(vec v, double fsamp){
 	
 	// Covariance matrix
 	mat Rxx;
-	Rxx = v * v.as_row();
+	Rxx = v * v.t();
 	// svd decomp
 	mat U; mat V; vec s;
 	svd(U,s,V,Rxx);
@@ -70,6 +70,7 @@ void music_estimate(vec v, double fsamp){
 		f0(i) = f(idxM(i));
 	}
 	
+	cout << scientific;
 	cout << "Estimated frequency is " << f0(0) << endl;
 }
 
