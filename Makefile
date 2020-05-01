@@ -8,7 +8,7 @@ OS_NAME := $(shell uname -s | tr A-Z a-z)
 
 
 # flags configured by CMake
-ifeq (OS_NAME,macos)
+ifeq ($(OS_NAME), macos)
   LIB_FLAGS = -larmadillo -framework Accelerate
 else
   ## NOTE: on Ubuntu and Debian based systems you may need to add -lgfortran
